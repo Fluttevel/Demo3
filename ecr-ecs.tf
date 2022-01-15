@@ -41,9 +41,6 @@ resource "aws_ecs_task_definition" "app" {
     cpu         = 256
     memory      = 512
 
-
-
-
     portMappings = [
       {
         containerPort = 80
