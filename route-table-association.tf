@@ -1,23 +1,16 @@
-# =========| ROUTE TABLE ASSOCIATIONS FOR PUBLIC |=========
+# ==========| ROUTE TABLE ASSOCIATION FOR PUBLIC |==========
 
-resource "aws_route_table_association" "public-subnet-1-route-table-association" {
-  subnet_id           = aws_subnet.public-subnet-1.id
-  route_table_id      = aws_route_table.public-route-table.id
+resource "aws_route_table_association" "public_subnet" {
+  count               = var.count_value
+  subnet_id           = element(aws_subnet.public.*.id, count.index)
+  route_table_id      = aws_route_table.public.id
 }
 
-resource "aws_route_table_association" "public-subnet-2-route-table-association" {
-  subnet_id           = aws_subnet.public-subnet-2.id
-  route_table_id      = aws_route_table.public-route-table.id
-}
 
-# =========| ROUTE TABLE ASSOCIATIONS FOR PRIVATE |=========
+# ==========| ROUTE TABLE ASSOCIATION FOR PRIVATE |==========
 
-resource "aws_route_table_association" "private-subnet-1-route-table-association" {
-  subnet_id         = aws_subnet.private-subnet-1.id
-  route_table_id    = aws_route_table.private-route-table-1.id
-}
-
-resource "aws_route_table_association" "private-subnet-2-route-table-association" {
-  subnet_id         = aws_subnet.private-subnet-2.id
-  route_table_id    = aws_route_table.private-route-table-2.id
+resource "aws_route_table_association" "private_subnet" {
+  count          = var.count_value
+  subnet_id      = element(aws_subnet.private.*.id, count.index)
+  route_table_id = element(aws_route_table.private.*.id, count.index)
 }

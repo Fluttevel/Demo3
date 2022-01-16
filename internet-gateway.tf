@@ -1,9 +1,9 @@
 # =========| INTERNET GATEWAY |=========
 
-resource "aws_internet_gateway" "internet-gateway" {
-  vpc_id    = aws_vpc.vpc.id
+resource "aws_internet_gateway" "internet_gateway" {
+  vpc_id = aws_vpc.vpc.id
 
   tags      = {
-    Name    = "Demo Internet Gateway"
+    Name    = "Internet Gateway for ${var.app_name}-${var.environment}"
   }
 }

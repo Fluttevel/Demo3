@@ -1,40 +1,26 @@
-# =========| SECURITY GROUPS |=========
+# ==========| SECURITY GROUP |==========
 
-resource "aws_security_group" "demo-instance" {
-  name        = "Terraform Demo Instance"
-  description = "Enable access on Port 8080"
+resource "aws_security_group" "http" {
+  name        = "Security Group access to HTTP for ${var.app_name}-${var.environment}"
+  description = "Enable HTTP access on Port 80"
   vpc_id      = aws_vpc.vpc.id
 
   ingress {
-    description = "Access to Port 8080"
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-resource "aws_security_group" "alb-security-group" {
-  name        = "ALB Security Group"
-  description = "Enable HTTP/HTTPS access on Port 80/443"
-  vpc_id      = aws_vpc.vpc.id
-
-  ingress {
-    description      = "HTTP Access"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "HTTP Access"
+    from_port   = var.server_port
+    to_port     = var.server_port
+    protocol    = var.protocol_tcp
+    cidr_blocks = [var.cidr_block_0]
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = [var.cidr_block_0]
   }
 
   tags   = {
-    Name = "ALB Security Group"
+    Name = "Security Group access to HTTP for ${var.app_name}-${var.environment}"
   }
 }

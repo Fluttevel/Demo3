@@ -1,19 +1,11 @@
 # =========| NAT GATEWAYS |=========
 
-resource "aws_nat_gateway" "nat-gateway-1" {
-  allocation_id = aws_eip.eip-for-nat-gateway-1.id
-  subnet_id     = aws_subnet.public-subnet-1.id
+resource "aws_nat_gateway" "nat_gateway" {
+  count         = var.count_value
+  allocation_id = element(aws_eip.nat_gateway.*.id, count.index)
+  subnet_id     = element(aws_subnet.public.*.id, count.index)
 
   tags   = {
-    Name = "NAT Gateway Public Subnet 1"
-  }
-}
-
-resource "aws_nat_gateway" "nat-gateway-2" {
-  allocation_id = aws_eip.eip-for-nat-gateway-2.id
-  subnet_id     = aws_subnet.public-subnet-2.id
-
-  tags   = {
-    Name = "NAT Gateway Public Subnet 2"
+    Name = "NAT Gateway Public Subnet ${count.index + 1} for ${var.app_name}-${var.environment}"
   }
 }

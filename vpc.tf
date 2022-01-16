@@ -1,11 +1,11 @@
-# =========| VPS |=========
+# ==========| VPS |==========
 
 resource "aws_vpc" "vpc" {
-  cidr_block              = "10.0.0.0/16"
-  instance_tenancy        = "default"
-  enable_dns_hostnames    = true
+  cidr_block              = var.vpc.cidr_block
+  instance_tenancy        = var.vpc.instance_tenancy
+  enable_dns_hostnames    = var.vpc.enable_dns_hostnames
 
-  tags      = {
-    Name    = "Demo VPC"
+  tags = {
+    Name    = "VPC for ${var.app_name}-${var.environment}"
   }
 }
