@@ -1,0 +1,22 @@
+/*-----------
+    ГАЛЕРЕЯ
+-------------*/
+
+.imgLink
+{
+    border: 3px solid;
+    border-image: linear-gradient(20deg, #F92056 38%, #00DEFF 65%);
+    border-image-slice: 1;
+    margin: 5px;
+    transition: 1s;
+}
+
+.imgLink:hover
+{
+    box-shadow: 0px 0px 30px 5px  rgb(202, 31, 218);
+    filter: saturate(200%);
+    border-image: linear-gradient(20deg, rgb(255, 166, 0) 38%, rgb(236, 42, 42) 65%);
+    border-image-slice: 1;
+}
+
+/* Добавить выделение картинки */
