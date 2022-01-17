@@ -6,7 +6,7 @@ data "template_file" "container_definitions" {
   vars = {
     app_image      = local.app_image
     container_name = local.container_name
-    app_port       = var.app_port
+    app_port       = var.server_port
     fargate_cpu    = var.fargate_cpu
     fargate_memory = var.fargate_memory
     aws_region     = var.aws_region

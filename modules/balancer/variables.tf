@@ -1,4 +1,4 @@
-# ==========| VARIABLES FOR "LOAD BALANCER" MODULE |==========
+# ==========| VARIABLES FOR "BALANCER" MODULE |==========
 
 variable "load_balancer_type" {
   description = "Load Balancer type"
@@ -58,4 +58,19 @@ variable "listener_rule" {
     path_pattern = "*"
     action_type  = "forward"
   }
+}
+
+
+# ==========|  IMPORT VARIABLES FROM OTHER MODULES  |==========
+
+variable "vpc_id" {
+  description = "VPC ID"
+  type        = string
+  default     = null
+}
+
+variable "public_subnets_id" {
+  description = "Public Subnets ID"
+  type        = list(string)
+  default     = null
 }

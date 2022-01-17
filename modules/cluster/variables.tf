@@ -1,14 +1,13 @@
 # ==========| VARIABLES FOR "CLUSTER" MODULE |==========
 
 variable "task_definition_template" {
-  description = "Template JSON file for resource task_definition"
+  description = "JSON Template file for resource task_definition"
   type        = string
   default     = "container_definitions.json.tpl"
 }
 
-
 variable "launch_type" {
-  description = "FARGATE - AWS-managed infrastructure"
+  description = "AWS-managed infrastructure 'FARGATE'"
   type        = string
   default     = "FARGATE"
 }
@@ -31,17 +30,17 @@ variable "fargate_memory" {
   default     = "512"
 }
 
+variable "ecs_task_execution_role_name" {
+  description = "ECS task execution role name"
+  type        = string
+  default     = "TaskExecutionRole"
+}
 
-
-
-
-
-
-
-
-
-
-
+variable "ecs_task_role_name" {
+  description = "ECS task role name"
+  type        = string
+  default     = "TaskRole"
+}
 
 variable "protocol_tcp" {
   description = "Protocol 'TCP'"
@@ -52,4 +51,24 @@ variable "protocol_tcp" {
 locals {
   container_name  = format("%s-%s-app", var.app_name, var.environment)
   app_image       = format("%s/%s-%s:%s", var.ecr_repository_url, var.app_name, var.environment, var.image_tag)
+}
+
+
+# ==========|  IMPORT VARIABLES FROM OTHER MODULES  |==========
+
+variable "private_subnets_id" {
+  description = "Private Subnets ID"
+  type        = list(string)
+  default     = null
+}
+
+variable "lb_target_group_id" {
+  description = "ALB Target Group ID"
+  type        = string
+  default     = null
+}
+
+variable "lb_listener" {
+  description = "ALB Listener"
+  default     = null
 }

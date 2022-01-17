@@ -3,7 +3,7 @@
 resource "aws_security_group" "http" {
   name        = "Security Group access to HTTP for ${var.app_name}-${var.environment}"
   description = "Enable HTTP access on Port 80"
-  vpc_id      = aws_vpc.vpc.id
+  vpc_id      = aws_vpc.vpc.id # out
 
   ingress {
     description = "HTTP Access"
