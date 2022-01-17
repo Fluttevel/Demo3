@@ -43,17 +43,17 @@ resource "aws_ecs_service" "main" {
 
   network_configuration {
     security_groups  = [aws_security_group.http.id]
-    subnets          = var.private_subnets_id # out
+    subnets          = aws_subnet.private.*.id # var.private_subnets_id # out
     assign_public_ip = true
   }
 
   load_balancer {
-    target_group_arn = var.lb_target_group_id # out
+    target_group_arn = aws_lb_target_group.alb.id # var.lb_target_group_id # out
     container_name   = local.container_name
     container_port   = var.server_port
   }
 
-  depends_on = [var.lb_listener, aws_iam_role_policy.ecs_task_execution_role]
+  depends_on = [aws_lb_listener.http, aws_iam_role_policy.ecs_task_execution_role]
 }
 
 
@@ -124,7 +124,7 @@ EOF
 resource "aws_security_group" "http" {
   name        = "Security Group access to HTTP for ${var.app_name}-${var.environment}"
   description = "Enable HTTP access on Port ${var.server_port}"
-  vpc_id      = aws_vpc.vpc.id # out
+  vpc_id      = aws_vpc.vpc.id # var.vpc_id # out
 
   ingress {
     description = "HTTP Access"

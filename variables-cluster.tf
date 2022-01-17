@@ -59,7 +59,7 @@ locals {
 
 
 
-# ==========|  EXPORT VARIABLES FOR OTHER MODULES  |==========
+# ==========|  IMPORT VARIABLES FROM OTHER MODULES  |==========
 
 #variable "private_subnets_id" {
 #  description = "Private Subnets ID"

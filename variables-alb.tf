@@ -79,3 +79,9 @@ variable "listener_rule" {
 #  type        = list(string)
 #  default     = null
 #}
+#
+#variable "security_group_id" {
+#  description = "Security Group ID"
+#  type        = string
+#  default     = null
+#}

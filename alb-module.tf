@@ -8,8 +8,8 @@
 resource "aws_lb" "alb" {
   name               = "terraform-alb-${var.app_name}-${var.environment}"
   load_balancer_type = var.load_balancer_type # type = ALB
-  subnets            = aws_vpc.vpc.id # var.vpc_id # out
-  security_groups    = aws_subnet.public.*.id # [var.public_subnets_id] # out
+  subnets            = aws_subnet.public.*.id # [var.public_subnets_ip] # out
+  security_groups    = [aws_security_group.http.id] # [var.security_group_id] # out
 }
 
 
